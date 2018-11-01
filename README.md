@@ -3,16 +3,19 @@
 ## Technologies used
 This project create a reporting tool that prints out reports (in plain text) based on the data in the database. This reporting tool is a Python program using the psycopg2 module to connect to the database.
 
+
+
 ## Technologies used
 1. PostgreSQL
 2. Writing Python code with DB-API
 3. Linux-based virtual machine (VM) Vagrant
 
+
 ## Project Requirements
 What are we reporting:
 1. What are the most popular three articles of all time?
 
-- Which articles have been accessed the most? Present this information as a sorted list with the most popular article at the top.
+- Present this information as a sorted list with the most popular article at the top.
 
 2. Who are the most popular article authors of all time?
 
@@ -28,8 +31,10 @@ Style Requirements:
 * The code is error free and conforms to the PEP8 style recommendations.
 * The code presents its output in clearly formatted plain text.
 
+
 ## System setup
 To start on this project, you'll need database software (provided by a Linux virtual machine) and the data to analyze.
+
 
 #### Installing the dependencies and setting up the files:
 1. Download [Vagrant](https://www.vagrantup.com/) and install.
@@ -40,6 +45,8 @@ These files configure the virtual machine and install all the tools needed to ru
 
 * Unzip the data to get the newsdata.sql file.
 * Put the newsdata.sql file into the vagrant directory
+* In your terminal run ````$ psql -d news -f newsdata.sql```` to access the database
+
 
 5. Clone this repository to a directory of your choice.
 
@@ -51,6 +58,8 @@ These files configure the virtual machine and install all the tools needed to ru
 1. Once it is built, run ``` vagrant ssh ``` to connect.
 1. cd into the correct project directory: ``` cd /vagrant/log_analysis ```
 
+
+
 ## Views used in this project
 #### Error view:
 to get the number of error by day
@@ -58,7 +67,7 @@ to get the number of error by day
 CREATE VIEW error as
 SELECT date_trunc('day', time) "day", COUNT(*) AS errors
 FROM log
-WHERE status LIKE '404%'
+WHERE log.status != '200 OK'
 GROUP BY day;
 ````
 #### Total view:
@@ -70,6 +79,12 @@ SELECT date_trunc('day', time) "day", COUNT(*) AS total
 FROM log
 GROUP BY day;
 ````
+
+## Run the program
+- Run this command in your terminal  ```` python3 project1.py ````
+- replace python3 with python2 if you use python ver- 2
+
+
 
 
 ## The output should be something like this: 
